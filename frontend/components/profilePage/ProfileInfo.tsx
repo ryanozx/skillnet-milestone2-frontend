@@ -28,7 +28,7 @@ export default function ProfileInfo({username}: {username: string}) {
         const base_url = process.env.BACKEND_BASE_URL;
         const currentUrl = base_url + "/auth/user";
         const profileUrl = base_url + "/auth/users/" + username;
-        if (username) {
+        if (username && username !== "undefined") {
             axios.get(currentUrl, { withCredentials: true })
             .then((res) => {
                 const currentUser = res.data.data.Username;
