@@ -7,11 +7,11 @@ import { useRouter } from 'next/router';
 const FormButtons: React.FC<{handleSubmit: () => void}> = ({handleSubmit}) => {
     const router = useRouter();
     const handleSkip = () => {
-        router.push('/feed')
+        router.push(`/feed`)
     }
 
     return (
-        <Stack isInline justifyContent="flex-end">
+        <Stack justifyContent="flex-end">
             <Button variant="outline" mr={2} onClick={handleSkip}>
                 Skip
             </Button>

@@ -1,7 +1,7 @@
-import React, {useRef} from 'react'
-import axios from 'axios'
-import {AlertDialog, AlertDialogBody, AlertDialogContent, AlertDialogFooter, AlertDialogHeader, AlertDialogOverlay, Button, MenuItem, useToast, useDisclosure} from '@chakra-ui/react'
-import { type PostComponent } from './Post';
+import React, {useRef} from "react"
+import axios from "axios"
+import {AlertDialog, AlertDialogBody, AlertDialogContent, AlertDialogFooter, AlertDialogHeader, AlertDialogOverlay, Button, MenuItem, useToast, useDisclosure} from "@chakra-ui/react"
+import { PostComponent } from "./Post";
 
 interface DeletePostItemProps {
     post: PostComponent;
@@ -20,9 +20,9 @@ export default function DeletePostItem(props : DeletePostItemProps) {
         .then(res => {
             props.deleteHandler(true);
             toast({
-                title: 'Post deleted.',
-                description: 'Your post has been deleted.',
-                status: 'success',
+                title: "Post deleted.",
+                description: "Your post has been deleted.",
+                status: "success",
                 duration: 5000,
                 isClosable: true,
             });
@@ -30,9 +30,9 @@ export default function DeletePostItem(props : DeletePostItemProps) {
         .catch(err => {
             console.log(err);
             toast({
-                title: 'An error occurred.',
+                title: "An error occurred.",
                 description: err.response.data.error,
-                status: 'error',
+                status: "error",
                 duration: 5000,
                 isClosable: true,
             });

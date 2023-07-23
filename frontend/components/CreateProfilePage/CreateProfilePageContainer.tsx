@@ -14,17 +14,10 @@ import NameTitleFields from './NameTitleFields';
 import AboutMeField from './AboutMeField';
 import FormButtons from './FormButtons';
 import { requireAuth } from '../../withAuthRedirect';
-import {useRouter} from 'next/router';
-
-export interface FormFields {
-    aboutMe: string,
-    name: string,
-    title: string,
-    profilePic: string,
-}
+import {useRouter} from "next/router";
 
 export default requireAuth(function CreateProfilePageContainer() {
-    const [form, setForm] = useState<FormFields>({
+    const [form, setForm] = useState({
         aboutMe: '',
         name: '',
         title: '',
@@ -33,18 +26,18 @@ export default requireAuth(function CreateProfilePageContainer() {
 
     const router = useRouter();
     const toast = useToast();
-    const baseUrl = process.env.BACKEND_BASE_URL || "";
+    const base_url = process.env.BACKEND_BASE_URL;
 
     useEffect(() => {
         axios
-        .get(baseUrl + '/auth/user', { withCredentials: true })
+        .get(base_url + '/auth/user', { withCredentials: true })
         .then((res) => {
             const { AboutMe, Name, Title, ProfilePic } = res.data.data;
             setForm({
-                aboutMe: AboutMe || '',
-                name: Name || '',
-                title: Title || '',
-                profilePic: ProfilePic || '',
+                aboutMe: AboutMe ? AboutMe : '',
+                name: Name ? Name : '',
+                title: Title ? Title : '',
+                profilePic: ProfilePic ? ProfilePic : '',
             });
         })
         .catch((error) => {
@@ -57,35 +50,36 @@ export default requireAuth(function CreateProfilePageContainer() {
     };
 
     const handleSubmit = () => {
-        axios.patch(baseUrl + '/auth/user', form, { withCredentials: true })
-        .then((res) => {
-            toast({
-                title: 'Form submission successful.',
-                description: 'Your profile has been updated!',
-                status: 'success',
-                duration: 5000,
-                isClosable: true,
+        const base_url = process.env.BACKEND_BASE_URL;
+        axios.patch(base_url + '/auth/user', form, { withCredentials: true })
+            .then((res) => {
+                toast({
+                    title: "Form submission successful.",
+                    description: "Your profile has been updated!",
+                    status: "success",
+                    duration: 5000,
+                    isClosable: true,
+                });
+                router.push("/feed");
+            })
+            .catch((error) => {
+                console.log(error);
+                toast({
+                    title: "An error occurred.",
+                    description: error.response.data.error,
+                    status: "error",
+                    duration: 5000,
+                    isClosable: true,
+                });
             });
-            router.push('/feed');
-        })
-        .catch((error) => {
-            console.log(error);
-            toast({
-                title: 'An error occurred.',
-                description: error.response.data.error,
-                status: 'error',
-                duration: 5000,
-                isClosable: true,
-            });
-        });
     };
 
     return (
         <>
-            <Flex justify="center" align="center" h="100vh" direction={{base: 'column', lg: 'row'}}>
+            <Flex justify="center" align="center" h="100vh" direction={{base: "column", lg: "row"}}>
                 <Box 
                     p={5} shadow="md" borderWidth="1px" borderRadius="md" 
-                    w={{base: '90vw', lg: '60vw'}}>
+                    w={{base: "90vw", lg: "60vw"}}>
                     <VStack spacing={10} alignItems="stretch">
                         <Text fontSize="3xl" fontWeight="bold">Create Your Profile</Text>
                         <HStack pl={{base: 0, md:20}} justify="center">

@@ -4,9 +4,8 @@ import {
     FormLabel,
     Textarea,
 } from '@chakra-ui/react';
-import {type FormFields} from './CreateProfilePageContainer';
 
-const AboutMeField: React.FC<{form: FormFields, handleChange: (e: React.ChangeEvent<HTMLTextAreaElement>) => void}> = ({form, handleChange}) => {
+const AboutMeField: React.FC<{form: any, handleChange: (e: React.ChangeEvent<HTMLTextAreaElement>) => void}> = ({form, handleChange}) => {
     return (
         <FormControl>
             <FormLabel>About Me</FormLabel>

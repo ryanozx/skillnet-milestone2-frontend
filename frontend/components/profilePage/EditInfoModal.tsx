@@ -12,13 +12,24 @@ import {
     TabPanel,
     TabPanels,
     useToast
-} from '@chakra-ui/react';
+} from "@chakra-ui/react";
 import { CloseIcon, CheckIcon } from '@chakra-ui/icons';
 import BasicInfoForm from './BasicInfoForm';
-import PrivacyForm, {type FormType} from './PrivacyForm';
-import { type User } from '../../types';
+import PrivacyForm from './PrivacyForm';
+import { User } from '../../types';
+import { escapeHtml } from '../../types';
+
+export interface FormType {
+    name: string;
+    title: string;
+    about: string;
+    privacySettings: {
+      [key: string]: boolean;
+    };
+}
 
 interface EditProfileModalProps {
+    user: User;
     setUser: React.Dispatch<React.SetStateAction<User>>;
     handleOpen: () => void;
     handleClose: () => void;
@@ -27,18 +38,16 @@ interface EditProfileModalProps {
 }  
 
 export default function EditProfileModal(props: EditProfileModalProps) {
-    const { handleOpen, handleClose, isOpen, setIsOpen, setUser } = props;
+    const { handleClose, isOpen, setIsOpen, setUser } = props;
     const toast = useToast();
     const [activeTab, setActiveTab] = useState(0);
     const [form, setForm] = useState<FormType>({
-        name: '',
-        title: '',
-        about: '',
+        name: props.user.Name,
+        title: props.user.Title,
+        about: props.user.AboutMe,
         privacySettings: {
-            tagline: false,
-            about: false,
-            projects: false,
-            activity: false
+            title: props.user.ShowTitle,
+            about: props.user.ShowAboutMe,
         }
     });
 
@@ -64,52 +73,24 @@ export default function EditProfileModal(props: EditProfileModalProps) {
         setActiveTab(index);
     };
 
-    useEffect(() => {
-        if (isOpen) {
-            const sessionId = sessionStorage.getItem('sessionId');
-            console.log('API call to get the current privacy setting of user');
-            axios
-                .get('privacy-endpoint', {
-                headers: {
-                    Authorization: `Bearer ${sessionId}`
-                }
-                })
-                .then(response => {
-                setForm(prevState => ({
-                    ...prevState,
-                    privacySettings: response.data
-                }));
-                })
-                .catch(error => {
-                console.error(error);
-                });
-        }
-        
-    }, [isOpen]);
-
     const handleSave = () => {
-        const baseUrl = process.env.BACKEND_BASE_URL || "";
-        const url = baseUrl + '/auth/user'
+        const base_url = process.env.BACKEND_BASE_URL;
+        const url = base_url + "/auth/user"
         axios.patch(url, {
-                name: form.name,
-                title: form.title,
-                aboutme: form.about,
+                "Name": escapeHtml(form.name),
+                "Title": escapeHtml(form.title),
+                "AboutMe": escapeHtml(form.about),
+                "ShowAboutMe": form.privacySettings["about"],
+                "ShowTitle": form.privacySettings["title"],
             }, {
                 withCredentials: true,
             })
             .then(res => {
-                console.log(res.data); // Log the response data
-                const { AboutMe, Name, Title } = res.data.data;
-                setUser((prevUser: User) => ({
-                    ...prevUser,
-                    AboutMe: AboutMe || 'No description available',
-                    Name: Name || 'No display name',
-                    Title: Title || 'No title available',
-                }));
+                setUser({...res.data.data});
                 toast({
-                    title: 'Profile updated.',
-                    description: 'We\'ve updated your profile for you.',
-                    status: 'success',
+                    title: "Profile updated.",
+                    description: "We've updated your profile for you.",
+                    status: "success",
                     duration: 9000,
                     isClosable: true,
                 });
@@ -121,7 +102,7 @@ export default function EditProfileModal(props: EditProfileModalProps) {
     };
 
     return (
-        
+        <>
         <Modal isOpen={isOpen} onClose={handleClose} size={{ base: 'md', md: '2xl' }} closeOnOverlayClick={false}>
             <ModalOverlay />
             <ModalContent>
@@ -148,8 +129,8 @@ export default function EditProfileModal(props: EditProfileModalProps) {
                     </Button>                
                 </ModalFooter>
             </ModalContent>
-            </Modal>
-
+        </Modal>
+        </>
     );
-}
+};
 

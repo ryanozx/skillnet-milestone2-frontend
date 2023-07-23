@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { MouseEventHandler } from 'react';
 import {
     Link,
     Menu,
@@ -9,7 +9,7 @@ import {
 import LogoutButton from './LogoutButton';
 import ProfileAvatar from './ProfileAvatar';
 
-interface ProfileButtonProps {
+export interface ProfileButtonProps {
     profilePic: string;
     username: string;
 }
@@ -20,7 +20,7 @@ export default function ProfileButton(props: ProfileButtonProps) {
         <Menu>
             <ProfileAvatar profilePic={profilePic}/>
             <MenuList>
-                <MenuItem><Link href={`/profile/${username}`}>View your profile</Link></MenuItem>
+            <Link href={`/profile/${username}`}><MenuItem>View your profile</MenuItem></Link>
                 <MenuDivider />
                 <LogoutButton />
             </MenuList>

@@ -27,7 +27,9 @@ const DrawerMenu: React.FC<DrawerMenuProps> = ({ isOpen, onClose, btnRef }) => {
             <DrawerOverlay />
             <DrawerContent>
                 <DrawerCloseButton />
-                <DrawerHeader><Link href="/feed">SkillNet</Link></DrawerHeader>
+                <Link href="/feed">
+                    <DrawerHeader>SkillNet</DrawerHeader>
+                </Link>
                 <DrawerBody>
                     <SideBar/>
                 </DrawerBody>

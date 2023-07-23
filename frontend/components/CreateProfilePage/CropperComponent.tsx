@@ -24,7 +24,7 @@ const CropperComponent: React.FC<CropperComponentProps> = ({profilePic}) => {
   
     const handleCroppedImage = (dataUrl: string) => {
         const base_url = process.env.BACKEND_BASE_URL;
-        const url = base_url + '/auth/user';
+        const url = base_url + "/auth/user";
         axios.patch(url, {
                 profilepic: dataUrl,
             }, {
@@ -34,9 +34,9 @@ const CropperComponent: React.FC<CropperComponentProps> = ({profilePic}) => {
                 const { ProfilePic } = res.data.data;
                 setNeedUpdate(true);
                 toast({
-                    title: 'Profile updated.',
-                    description: 'We\'ve updated your profile picture for you.',
-                    status: 'success',
+                    title: "Profile updated.",
+                    description: "We've updated your profile picture for you.",
+                    status: "success",
                     duration: 9000,
                     isClosable: true,
                 });
@@ -48,7 +48,7 @@ const CropperComponent: React.FC<CropperComponentProps> = ({profilePic}) => {
 
     return (
         <>
-            <EditPicButton currentProfilePic={profilePic || ''} onValidFile={handleValidFile} />
+            <EditPicButton currentProfilePic={profilePic || ""} onValidFile={handleValidFile} />
             <ImageCropper isOpen={isOpen} onClose={onClose} onCropped={handleCroppedImage} imageSrc={selectedImage} />
         </>
     );

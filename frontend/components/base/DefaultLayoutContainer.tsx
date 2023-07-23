@@ -3,9 +3,9 @@ import {
     GridItem,
     useBreakpointValue
 }   from '@chakra-ui/react';
-import NavBar from './NavBar/NavBar'
-import SideBar from './SideBar/SideBar';
-import React, { useState, useEffect, type ReactNode } from 'react';
+import NavBar from "./NavBar/NavBar"
+import SideBar from "./SideBar/SideBar";
+import React, { useState, useEffect, ReactNode } from 'react';
 import axios from 'axios';
 import { useUser } from '../../userContext';
 import { requireAuth } from '../../withAuthRedirect';
@@ -18,10 +18,10 @@ interface DefaultLayoutContainerProps {
 
 export default requireAuth(function DefaultLayoutContainer({ children }: DefaultLayoutContainerProps) {
     const { needUpdate, setNeedUpdate } = useUser();
-    const [ profilePic, setProfilePic ] = useState('');
-    const [ username, setUsername ] = useState('');
+    const [ profilePic, setProfilePic ] = useState("");
+    const [ username, setUsername ] = useState("");
     const templateColumns = useBreakpointValue({ base: '1fr', lg: '20vw 3fr' });
-    const templateAreas = useBreakpointValue({ base: '"header" "main"', lg: '"header header" "nav main"' });
+    const templateAreas = useBreakpointValue({ base: `"header" "main"`, lg: `"header header" "nav main"` });
 
     useEffect(() => {
         if (needUpdate) {

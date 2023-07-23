@@ -1,9 +1,13 @@
 import { ChakraProvider } from '@chakra-ui/react';
-import React from 'react';
+import React, { createContext, useState, useEffect, useContext } from 'react';
 import { UserProvider } from '../userContext';
-import type {AppProps} from 'next/app';
 
-export default function MyApp({ Component, pageProps } : AppProps) {
+interface MyAppProps {
+  Component: React.ComponentType<any>;
+  pageProps: any;
+}
+
+const MyApp: React.FC<MyAppProps> = ({ Component, pageProps }) => {
   return (
     <React.StrictMode>
       <ChakraProvider>
@@ -13,5 +17,6 @@ export default function MyApp({ Component, pageProps } : AppProps) {
       </ChakraProvider>
     </React.StrictMode>
   );
-}
+};
 
+export default MyApp;

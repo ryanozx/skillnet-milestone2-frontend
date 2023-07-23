@@ -1,7 +1,7 @@
-import React from 'react';
-import axios from 'axios';
-import {Button, useToast} from '@chakra-ui/react';
-import {type PostView} from './Post';
+import React from "react";
+import axios from "axios";
+import {Button, useToast} from "@chakra-ui/react";
+import {PostView} from "../Post";
 import { CheckIcon } from '@chakra-ui/icons';
 
 interface EditPostSubmitProps {
@@ -15,13 +15,13 @@ export default function EditPostSubmit(props : EditPostSubmitProps) {
     const toast = useToast();
 
     const onSubmit = () => {
-        axios.patch(props.postURL, {'content': props.text}, {withCredentials: true})
+        axios.patch(props.postURL, {"content": props.text}, {withCredentials: true})
         .then(res => {
-            props.updatePostHandler(res.data.data);
+            props.updatePostHandler(res.data["data"]);
             toast({
-                title: 'Post updated.',
-                description: 'Your post has been updated.',
-                status: 'success',
+                title: "Post updated.",
+                description: "Your post has been updated.",
+                status: "success",
                 duration: 5000,
                 isClosable: true,
             });
@@ -29,9 +29,9 @@ export default function EditPostSubmit(props : EditPostSubmitProps) {
         .catch(err => {
             console.log(err);
             toast({
-                title: 'An error occurred.',
+                title: "Failed to update post.",
                 description: err.response.data.error,
-                status: 'error',
+                status: "error",
                 duration: 5000,
                 isClosable: true,
             });

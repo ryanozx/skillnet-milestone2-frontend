@@ -1,5 +1,6 @@
-import ProfileInfo from './ProfileInfo';
-import DefaultLayoutContainer from '../base/DefaultLayoutContainer';
+import React from 'react';
+import ProfileInfo from "./ProfileInfo";
+import DefaultLayoutContainer from "../base/DefaultLayoutContainer";
 
 interface ProfilePageContainerProps {
     username: string;

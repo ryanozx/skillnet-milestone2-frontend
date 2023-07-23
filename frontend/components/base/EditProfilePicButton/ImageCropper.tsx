@@ -1,13 +1,5 @@
 import React, { useRef } from 'react';
-import { 
-    Button, 
-    Modal, 
-    ModalOverlay, 
-    ModalContent, 
-    ModalBody, 
-    ModalFooter, 
-    ModalCloseButton,
-} from '@chakra-ui/react';
+import { Button, Modal, ModalOverlay, ModalContent, ModalBody, ModalFooter, ModalCloseButton, useDisclosure } from '@chakra-ui/react';
 import axios from 'axios';
 import Cropper from 'react-cropper';
 import 'cropperjs/dist/cropper.css';
@@ -31,11 +23,11 @@ const ImageCropper: React.FC<ImageCropperProps> = ({ isOpen, onClose, onCropped,
     const saveCroppedImage = async () => {
         const imageElement = cropperRef?.current;
         const base_url = process.env.BACKEND_BASE_URL;
-        const url = base_url + '/auth/user/photo';
-        if ((imageElement?.cropper) != null) {
+        const url = base_url + "/auth/user/photo";
+        if (imageElement?.cropper) {
             const croppedCanvas = imageElement.cropper.getCroppedCanvas();
             croppedCanvas.toBlob(async (blob) => {
-                if (blob != null) {
+                if (blob) {
                     const formData = new FormData();
                     formData.append('file', blob, 'image.jpg');
                     axios.post(url, formData, {

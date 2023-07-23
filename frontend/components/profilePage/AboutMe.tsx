@@ -7,12 +7,12 @@ import {
   Button
 } from '@chakra-ui/react';
 
-export default function AboutMe({ aboutMe }: { aboutMe?: string }) {
+export default function AboutMe({ aboutMe }: { aboutMe: string }) {
     const [showMore, setShowMore] = useState(false);
-    const [height, setHeight] = useState('200px');
+    const [height, setHeight] = useState("200px");
     const handleClick = () => {
         setShowMore(!showMore);
-        setHeight(showMore ? '200px' : 'auto');
+        setHeight(showMore ? "200px" : "auto");
     };
 
     return (
@@ -30,11 +30,11 @@ export default function AboutMe({ aboutMe }: { aboutMe?: string }) {
                     h={height}
                     overflow="hidden"
                 >
-                    <Text>{aboutMe}</Text>
+                    <Text>{aboutMe ? aboutMe : "No description available"}</Text>
                 </Box>
                 {aboutMe && aboutMe.length > 100 && (
                     <Button onClick={handleClick} size="sm" alignSelf="flex-end">
-                        {showMore ? 'Show less' : 'Show more'}
+                        {showMore ? "Show less" : "Show more"}
                     </Button>
                 )}
             </VStack>

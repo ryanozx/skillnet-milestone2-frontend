@@ -1,4 +1,4 @@
-import React, { type MouseEventHandler } from 'react';
+import React, { MouseEventHandler } from 'react';
 import {
     MenuItem,
     useToast
@@ -16,19 +16,19 @@ const LogoutButton: React.FC = () => {
             .then((res) => {
                 console.log(res);
                 toast({
-                    title: 'Form submission successful.',
-                    description: 'We\'ve successfully logged you out.',
-                    status: 'success',
+                    title: "Form submission successful.",
+                    description: "We've successfully logged you out.",
+                    status: "success",
                     duration: 5000,
                     isClosable: true,
                 });
-                router.push('/');
+                router.push("/");
             }).catch((error) => {
                 console.log(error.response);
                 toast({
-                    title: 'An error occurred.',
+                    title: "An error occurred.",
                     description: error.response.data.error,
-                    status: 'error',
+                    status: "error",
                     duration: 5000,
                     isClosable: true,
                 });

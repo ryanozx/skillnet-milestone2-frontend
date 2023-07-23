@@ -3,7 +3,7 @@ import { useDisclosure, useToast } from '@chakra-ui/react';
 import EditPicButton from './EditPicButton';
 import ImageCropper from './ImageCropper';
 import axios from 'axios';
-import { type User } from '../../../types';
+import { User } from '../../../types';
 import { useUser } from '../../../userContext';
 
 
@@ -34,13 +34,13 @@ const CropperComponent: React.FC<CropperComponentProps> = ({profilePic, setUser}
                 const { ProfilePic } = res.data.data;
                 setUser((prevUser: User) => ({
                     ...prevUser,
-                    ProfilePic
+                    ProfilePic: ProfilePic
                 }));
                 setNeedUpdate(true);
                 toast({
-                    title: 'Profile updated.',
-                    description: 'We\'ve updated your profile picture for you.',
-                    status: 'success',
+                    title: "Profile updated.",
+                    description: "We've updated your profile picture for you.",
+                    status: "success",
                     duration: 9000,
                     isClosable: true,
                 });
@@ -52,7 +52,7 @@ const CropperComponent: React.FC<CropperComponentProps> = ({profilePic, setUser}
 
     return (
         <>
-            <EditPicButton currentProfilePic={profilePic || ''} onValidFile={handleValidFile} />
+            <EditPicButton currentProfilePic={profilePic || ""} onValidFile={handleValidFile} />
             <ImageCropper isOpen={isOpen} onClose={onClose} onCropped={handleCroppedImage} imageSrc={selectedImage} />
         </>
     );

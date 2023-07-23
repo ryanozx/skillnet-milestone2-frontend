@@ -1,6 +1,6 @@
-import React from 'react';
-import {AlertDialog, AlertDialogBody, AlertDialogFooter, AlertDialogHeader, AlertDialogOverlay, Button, useDisclosure} from '@chakra-ui/react';
-import {CloseIcon} from '@chakra-ui/icons';
+import React from "react";
+import {AlertDialog, AlertDialogBody, AlertDialogFooter, AlertDialogHeader, AlertDialogOverlay, Button, useDisclosure} from "@chakra-ui/react";
+import {CloseIcon} from "@chakra-ui/icons";
 
 interface EditPostCancelProps {
     handleClose: () => void;

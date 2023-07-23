@@ -1,5 +1,5 @@
 // ImageUploadButton.tsx
-import React, { type ChangeEvent, useRef } from 'react';
+import React, { ChangeEvent, useRef } from 'react';
 import { Avatar, IconButton, Input } from '@chakra-ui/react';
 
 interface EditPicButtonProps {
@@ -15,10 +15,10 @@ const EditPicButton: React.FC<EditPicButtonProps> = ({ onValidFile, currentProfi
     };
 
     const handleFileChange = (event: ChangeEvent<HTMLInputElement>) => {
-        const file = (event.target.files != null) && event.target.files[0];
-        if ((file != null) && (file.type === 'image/jpeg' || file.type === 'image/png')) {
+        const file = event.target.files && event.target.files[0];
+        if (file && (file.type === 'image/jpeg' || file.type === 'image/png')) {
             onValidFile(file);
-        } else if (file != null) {
+        } else if (file) {
             alert('Please upload a jpg or png file.');
         }
     };

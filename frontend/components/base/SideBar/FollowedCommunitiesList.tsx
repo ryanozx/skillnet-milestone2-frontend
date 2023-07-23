@@ -12,17 +12,17 @@ import {
 
 export default function FollowedCommunitiesList(props: any) {
     const [showMore, setShowMore] = useState<boolean>(false);
-    const handleClick = () => { setShowMore(!showMore); };
+    const handleClick = () => setShowMore(!showMore);
 
     const followedCommunities = [
-        'Gardening',
-        'Cooking',
-        'Gaming',
-        'Music',
-        'Art',
-        'Photography',
-        'Sports',
-        'Movies'
+        "Gardening",
+        "Cooking",
+        "Gaming",
+        "Music",
+        "Art",
+        "Photography",
+        "Sports",
+        "Movies"
     ]
 
     const displayedCommunities = showMore ? followedCommunities : followedCommunities.slice(0, 5);
@@ -41,9 +41,9 @@ export default function FollowedCommunitiesList(props: any) {
             {followedCommunities.length > 5 && (
                 <>
                     <Divider/>
-                    <Flex justifyContent={'flex-end'} pt={3}>
-                        <Button onClick={handleClick} size="sm" alignSelf={'flex-end'}>
-                            {showMore ? 'Show less' : 'Show more'}
+                    <Flex justifyContent={"flex-end"} pt={3}>
+                        <Button onClick={handleClick} size="sm" alignSelf={"flex-end"}>
+                            {showMore ? "Show less" : "Show more"}
                         </Button>
                     </Flex>
                 </>
