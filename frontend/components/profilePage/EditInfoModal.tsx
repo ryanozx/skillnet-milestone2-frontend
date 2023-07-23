@@ -82,6 +82,7 @@ export default function EditProfileModal(props: EditProfileModalProps) {
                 "AboutMe": escapeHtml(form.about),
                 "ShowAboutMe": form.privacySettings["about"],
                 "ShowTitle": form.privacySettings["title"],
+                "ProfilePic": props.user.ProfilePic,
             }, {
                 withCredentials: true,
             })

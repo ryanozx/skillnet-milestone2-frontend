@@ -9,9 +9,10 @@ import { useUser } from '../../userContext';
 
 interface CropperComponentProps {
     profilePic?: string;
+    setProfilePic: (picURL : string) => void;
 }
 
-const CropperComponent: React.FC<CropperComponentProps> = ({profilePic}) => {
+const CropperComponent: React.FC<CropperComponentProps> = (props : CropperComponentProps) => {
     const { isOpen, onOpen, onClose } = useDisclosure();
     const [selectedImage, setSelectedImage] = useState<string | undefined>(undefined);
     const toast = useToast();
@@ -33,6 +34,7 @@ const CropperComponent: React.FC<CropperComponentProps> = ({profilePic}) => {
             .then(res => {
                 const { ProfilePic } = res.data.data;
                 setNeedUpdate(true);
+                props.setProfilePic(dataUrl);
                 toast({
                     title: "Profile updated.",
                     description: "We've updated your profile picture for you.",
@@ -48,7 +50,7 @@ const CropperComponent: React.FC<CropperComponentProps> = ({profilePic}) => {
 
     return (
         <>
-            <EditPicButton currentProfilePic={profilePic || ""} onValidFile={handleValidFile} />
+            <EditPicButton currentProfilePic={props.profilePic || ""} onValidFile={handleValidFile} />
             <ImageCropper isOpen={isOpen} onClose={onClose} onCropped={handleCroppedImage} imageSrc={selectedImage} />
         </>
     );

@@ -49,6 +49,10 @@ export default requireAuth(function CreateProfilePageContainer() {
         setForm({ ...form, [e.target.name]: e.target.value });
     };
 
+    const updatePic = (picURL : string) => {
+        setForm({...form, profilePic: picURL});
+    }
+
     const handleSubmit = () => {
         const base_url = process.env.BACKEND_BASE_URL;
         axios.patch(base_url + '/auth/user', form, { withCredentials: true })
@@ -84,7 +88,7 @@ export default requireAuth(function CreateProfilePageContainer() {
                         <Text fontSize="3xl" fontWeight="bold">Create Your Profile</Text>
                         <HStack pl={{base: 0, md:20}} justify="center">
                             <Box flex={2}>
-                                <CropperComponent profilePic={form.profilePic}/>
+                                <CropperComponent profilePic={form.profilePic} setProfilePic={updatePic}/>
                             </Box>
                             <Box flex={3}>
                                 <NameTitleFields form={form} handleChange={handleChange}/>
