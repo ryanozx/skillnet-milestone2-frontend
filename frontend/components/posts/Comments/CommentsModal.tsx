@@ -39,7 +39,6 @@ export default function CommentsModel(props: CommentModelProps) {
             setIsLoading(true);
             setError(null);
 
-            console.log(url)
             const fetchData = axios.get(url, {withCredentials: true});
             fetchData
             .then((response) => {

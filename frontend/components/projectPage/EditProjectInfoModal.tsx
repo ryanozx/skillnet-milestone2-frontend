@@ -29,7 +29,6 @@ export default function EditProjectInfoModal(props : EditProjectInfoModalProps) 
     const onSubmit = () => {
         axios.patch(projectURL, {"projectInfo": escapeHtml(text)}, {withCredentials: true})
         .then(res => {
-            console.log(res.data.data)
             props.updateProjectHandler({...res.data.data});
             toast({
                 title: "Project updated.",

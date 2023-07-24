@@ -56,7 +56,6 @@ export default function CreateProjectModal(props : CreateProjectModalProps) {
                 duration: 5000,
                 isClosable: true,
                 });
-                console.log(res.data.data);
                 router.push("/projects/" + res.data.data["ID"]);
                 handleClose();
             })

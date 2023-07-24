@@ -46,8 +46,6 @@ export default function Feed(props: FeedProps) {
         if (!isLoading) {
             setIsLoading(true);
             setError(null);
-
-            console.log(url)
             
             const fetchData = axios.get(url, {withCredentials: true});
             fetchData

@@ -46,7 +46,6 @@ export default function ProjectInfo(props : ProjectInfoProps) {
             const fetchData = axios.get(projectURL, {withCredentials: true});
             fetchData
             .then(res => {
-                console.log(res.data.data)
                 setProject({...res.data.data});
                 setIsOwner(res.data.data["IsOwner"]);
                 props.setCommunityID(res.data.data["CommunityID"]);
